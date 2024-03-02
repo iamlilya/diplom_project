@@ -51,14 +51,12 @@
         latitude: latitude,
         longitude: longitude
       };
-      console.log('coor')
       // Отправка координат на сервер
-      fetch('api/users/1/', {
+      fetch('api/gradient/?'+ new URLSearchParams(Point), {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json;charset=utf-8'
-        }//,
-        //body: JSON.stringify(Point)
+        }
       })
       .then(response => response.json())
       .then(data => console.log(data))
