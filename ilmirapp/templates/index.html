@@ -44,12 +44,9 @@
       });
     
       view.on("click", function(evt) {
-
-      var latitude = evt.mapPoint.latitude;
-      var longitude = evt.mapPoint.longitude;     
       let Point = {
-        latitude: latitude,
-        longitude: longitude
+        latitude: evt.mapPoint.latitude,
+        longitude: evt.mapPoint.longitude
       };
       // Отправка координат на сервер
       fetch('api/gradient/?'+ new URLSearchParams(Point), {
@@ -59,10 +56,20 @@
         }
       })
       .then(response => response.json())
-      .then(data => console.log(data))
+      .then(data => {
+        view.openPopup({
+          location: evt.mapPoint,
+          title: "You clicked here",
+          content: data
+        });
+        console.log(data)
+      })
       .catch(error => console.error('Error:', error));
     });
-    });
+
+      });
+
+
 
   </script>
  
@@ -72,8 +79,5 @@
   <div id="viewDiv"></div>
 </body>
 </html>
-
-
-
 
 
