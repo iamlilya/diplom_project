@@ -70,12 +70,12 @@ class Gradient(APIView):
 
         B_fi_fi_result = B_fi_fi.evalf(subs={r : r_num, q : q_num,fi : fi_num})
 
-        tensor_list.append(B_r_r_result)
-        tensor_list.append(B_r_q_result)
-        tensor_list.append(B_r_fi_result)
-        tensor_list.append(B_q_q_result)
-        tensor_list.append(B_q_fi_result)
-        tensor_list.append(B_fi_fi_result)
+        tensor_list.append(str(B_r_r_result))
+        tensor_list.append(str(B_r_q_result))
+        tensor_list.append(str(B_r_fi_result))
+        tensor_list.append(str(B_q_q_result))
+        tensor_list.append(str(B_q_fi_result))
+        tensor_list.append(str(B_fi_fi_result))
 
         B1 = -diff(V,r)
         B2 = -(1/r)*diff(V,q)
@@ -86,15 +86,11 @@ class Gradient(APIView):
         B2_result =  B2.evalf(subs={r : r_num, q : q_num,fi : fi_num})
         B3_result =  B3.evalf(subs={r : r_num, q : q_num,fi : fi_num})
 
+        grad_list.append(str(B1_result))
+        grad_list.append(str(B2_result))
+        grad_list.append(str(B3_result))
 
-        grad_list.append(B1_result)
-        grad_list.append(B2_result)
-        grad_list.append(B3_result)
-
-        # response = "tensor: " + tensor_list + "; gradient: " + grad_list
-        response = "tensor" + str(tensor_list) + "; gradient:" + str(grad_list)
-
-        return Response(response)
+        return Response({"tensor": tensor_list, "gradient": grad_list})
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

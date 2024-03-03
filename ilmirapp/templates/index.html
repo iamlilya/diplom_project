@@ -13,6 +13,7 @@
       height: 100%;
       width: 100%;
     }
+    
   </style>
 
   <link rel="stylesheet" href="https://js.arcgis.com/4.28/esri/themes/light/main.css" />
@@ -57,10 +58,22 @@
       })
       .then(response => response.json())
       .then(data => {
+        
+        const htmlContent = `<table><tr ><th>Name</th><th>Value</th></tr>`
+          +`<tr><td style="border-top: 1px solid black" rowspan="${data.tensor.length}">Тензор</td><td  style="border-top: 1px solid black">${data.tensor[0]}</td></tr>`
+          +`<tr><td>${data.tensor[1]}</td></tr>`
+          +`<tr><td>${data.tensor[2]}</td></tr>`
+          +`<tr><td>${data.tensor[3]}</td></tr>`
+          +`<tr><td>${data.tensor[4]}</td></tr>`
+          +`<tr><td>${data.tensor[5]}</td></tr>`
+          +`<tr"><td style="border-top: 1px solid black" rowspan="${data.tensor.length}">Градиент</td><td  style="border-top: 1px solid black">${data.gradient[0]}</td></tr>`
+          +`<tr><td>${data.gradient[1]}</td></tr>`
+          +`<tr><td>${data.gradient[2]}</td></tr>`
+          +"</table>";
         view.openPopup({
           location: evt.mapPoint,
           title: "You clicked here",
-          content: data
+          content: htmlContent
         });
         console.log(data)
       })
