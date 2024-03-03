@@ -59,7 +59,7 @@
       .then(response => response.json())
       .then(data => {
         
-        const htmlContent = `<table><tr ><th>Name</th><th>Value</th></tr>`
+        const htmlContent = `<table><tr ><th>Переменная</th><th>Значение</th></tr>`
           +`<tr><td style="border-top: 1px solid black" rowspan="${data.tensor.length}">Тензор</td><td  style="border-top: 1px solid black">${data.tensor[0]}</td></tr>`
           +`<tr><td>${data.tensor[1]}</td></tr>`
           +`<tr><td>${data.tensor[2]}</td></tr>`
@@ -72,7 +72,7 @@
           +"</table>";
         view.openPopup({
           location: evt.mapPoint,
-          title: "You clicked here",
+          title: "Вы нажали здесь!",
           content: htmlContent
         });
         console.log(data)
