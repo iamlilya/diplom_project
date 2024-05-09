@@ -45,12 +45,21 @@
       });
     
       view.on("click", function(evt) {
-      let Point = {
-        latitude: evt.mapPoint.latitude,
-        longitude: evt.mapPoint.longitude
-      };
+        let point;
+        try {
+          point = {
+            latitude: evt.mapPoint.latitude,
+            longitude: evt.mapPoint.longitude
+          };
+        } catch (error) {
+          alert("Ошибка! Нажмите на точку внутри карты.");
+          return;
+        }
+      
+      
+      console.log(point);
       // Отправка координат на сервер
-      fetch('api/gradient/?'+ new URLSearchParams(Point), {
+      fetch('api/gradient/?'+ new URLSearchParams(point), {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json;charset=utf-8'

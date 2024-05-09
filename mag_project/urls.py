@@ -12,6 +12,7 @@ import numpy as np
 class Gradient(APIView):
     def get(self, request):
         print(request.GET)
+        
         lat = request.GET['latitude']
         lon = request.GET['longitude']
 
@@ -53,7 +54,7 @@ class Gradient(APIView):
 
     #перевод в сферические координаты
         r_num = math.sqrt(x **2 + y **2 + z **2)
-        q_num = math.atan(math.sqrt((x**2 + y**2) / z)) 
+        q_num = math.acos(z/math.sqrt((x**2 + y**2 + z**2))) 
         fi_num = math.atan(y/x) 
 
         tensor_list = []
